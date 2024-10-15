@@ -1,0 +1,17 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../app:/var/www
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - APP_KEY=base64:++432RQv6/s/nSD5DgNXtIfxN+kqCXp0n5MnLFevn34=
+
+volumes:
+  sqlite_data:

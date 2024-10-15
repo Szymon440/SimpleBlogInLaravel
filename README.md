@@ -1,0 +1,2 @@
+# SimpleBlogInLaravel
+recruitment task

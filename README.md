@@ -24,3 +24,11 @@ if occurs error "Please provide a valid cache path"
 - sessions
 - views
 - cache
+
+All posts 
+![image](https://github.com/user-attachments/assets/04376c55-fb8e-4358-b6e2-72c0e54053bb)
+
+My posts
+![image](https://github.com/user-attachments/assets/46c01127-1bb9-4077-b750-8ee4b6743aa9)
+
+

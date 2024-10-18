@@ -1,6 +1,5 @@
 FROM php:8.2-fpm
 
-# Instalacja wymaganych zależności
 RUN apt update && apt install -y \
     git \
     curl \
@@ -11,28 +10,23 @@ RUN apt update && apt install -y \
     libsqlite3-dev \
     zip \
     unzip \
-    # Instalacja Node.js i NPM
     nodejs \
     npm
 
-# Oczyszczenie po instalacji
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
-# Instalacja rozszerzeń PHP
 RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd pdo_sqlite
 
-# Kopiowanie Composer do kontenera
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Ustawienie katalogu roboczego
 WORKDIR /var/www
 
-# Skopiuj pliki aplikacji do kontenera
 COPY . .
+RUN mkdir -p storage/framework/sessions \
+    && mkdir -p storage/framework/views \
+    && mkdir -p storage/framework/cache \
 
-# Upewnij się, że plik bazy danych SQLite istnieje
-RUN #touch database/database.sqlite && chmod 777 database/database.sqlite
+RUN npm install \
+    npm run build
 
-# Komenda startowa
 CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]
-#CMD ["npm", "run", "dev"]
